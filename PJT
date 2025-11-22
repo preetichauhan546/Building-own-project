@@ -1,0 +1,63 @@
+name = input("Enter your name ").strip()
+age = int(input("Enter your age : "))
+from datetime import date
+QUESTIONS =["1) Do you feel physically tired even after rest?(0 = No,1=Sometimes,2=Often)",
+            "2)Do you have trouble concentrating? (0/1/2) ",
+            "3) Do you feel emotionally drained? (0/1/2)",
+            "4) Do you feel detached from usual things? (0/1/2)",
+            "5) do you have troble falling/staying asleep ? (0/1/2)",
+            "6) Do responsibilities feel overwhelming ? (0/1/2)",
+            ]
+total_score = 0
+for q in QUESTIONS :
+    print(q)
+    while True:
+        ans= input("Enter 0/1/2 : ")
+        if ans in ("0","1","2") :
+            total_score += int(ans)
+            break
+        else :
+            print("Invalid input.Please enter ONLY 0,1, or 2.")
+print("=====================================================================================================================================")
+print("RESULTS")
+print("======================================================================================================================================")
+print("Name : ",name)
+print("Age : ",age )
+print("Total Burnout Score :",total_score)
+print("=======================================================================================================================================")
+ #interpretation 
+if total_score<= 6:
+    print("Burnout Level : Low-You're doing okay,but keep an eye on your habits.")
+elif total_score<=14 :
+    print("Burnout Level: Moderate- You may need rest,better routines,or emotional care.")
+else :
+    print("Burnout Level : High - You should take a break and reflect;talk to someone if needed")
+print("\nWould you like to enter weekly mood ratings(Mon-sun) and see a simple plot?")
+choice=input("Type y for yes,n for no:").lower()
+if choice=="y":
+    days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+    mood=[]
+    print("Enter mood rating for each day(1=low,5=high).")
+    for d in days :
+        while True:
+            val=input("Mood for "+ d +"(1-5)")
+            if val.isdigit() :
+                n = int(val)
+                if 1<= n <= 5:
+                    mood.append(n)
+                    break
+                print("Invalid.Enter a number from 1 to 5.")
+    #plotting a graph 
+    import matplotlib.pyplot as plt 
+    plt.figure(figsize=(7,3))
+    plt.plot(days,mood,marker="o",color='green',linestyle="dashed",linewidth=3,markerfacecolor='blue',markersize=12)
+    plt.title("Weekly Mood Tracker")
+    plt.xlabel("Days")
+    plt.ylabel("Mood(1-5)")
+    plt.show()
+    print("Plot dispalyed.Take a screenshot of the plot for your report if needed.")
+else:
+    print("Skipping weekly mood plot.")
+print("\nNote : This tool is informational only and not a medical diagnosis.")
+print("========================================================================================================")
+print("Thank you for using this tool.")
